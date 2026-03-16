@@ -204,6 +204,7 @@
     <jctools.version>4.0.5</jctools.version>
     <hppc.version>0.9.1</hppc.version>
     <!-- plugin dependencies -->
+    <exec-maven-plugin.version>3.1.0</exec-maven-plugin.version>
     <apache-rat-plugin.version>0.16.1</apache-rat-plugin.version>
     <cobertura-maven-plugin.version>2.7</cobertura-maven-plugin.version>
     <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
@@ -1039,6 +1040,11 @@
             <skip>true</skip>
             <doclint>none</doclint>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>${exec-maven-plugin.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>

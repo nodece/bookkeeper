@@ -98,6 +98,16 @@ public class NativeUtils {
         System.load(temp.getAbsolutePath());
     }
 
+    public static void loadLibraryFromFile(String path) throws Exception {
+        checkArgument(path != null && !path.isEmpty(), "library path must not be empty");
+        final File file = new File(path);
+        checkArgument(file.isAbsolute(), "library path must be absolute");
+        if (!file.exists()) {
+            throw new FileNotFoundException("Couldn't find native library file " + path);
+        }
+        System.load(file.getAbsolutePath());
+    }
+
     /**
      * Returns jni library extension based on OS specification. Maven-nar generates jni library based on different OS :
      * http://mark.donszelmann.org/maven-nar-plugin/aol.html (jni.extension)

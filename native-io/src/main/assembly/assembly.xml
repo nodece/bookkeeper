@@ -43,20 +43,20 @@
 				<include>lib*</include>
 			</includes>
 		</fileSet>
-		<fileSet>
-			<directory>${project.build.directory}/nar/${project.artifactId}-${project.version}-${os.arch}-${os.name}-gpp-jni/lib/${os.arch}-${os.name}-gpp/jni
-			</directory>
-			<outputDirectory>lib</outputDirectory>
-			<includes>
-				<include>lib*</include>
-			</includes>
-		</fileSet>
+ 		<fileSet>
+ 			<directory>${project.build.directory}/nar/${project.artifactId}-${project.version}-${os.arch}-${os.name}-gpp-jni/lib/${os.arch}-${os.name}-gpp/jni
+ 			</directory>
+ 			<outputDirectory>lib</outputDirectory>
+ 			<includes>
+ 				<include>lib*</include>
+ 			</includes>
+ 		</fileSet>
 		<fileSet>
 			<directory>${project.build.directory}/classes</directory>
 			<outputDirectory></outputDirectory>
 			<includes>
 				<include>**/*</include>
-			</includes>
+ 			</includes>
 		</fileSet>
 	</fileSets>
 </assembly>

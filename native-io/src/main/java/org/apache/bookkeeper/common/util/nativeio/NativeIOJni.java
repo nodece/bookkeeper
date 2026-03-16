@@ -21,7 +21,6 @@
 package org.apache.bookkeeper.common.util.nativeio;
 
 import org.apache.bookkeeper.common.util.nativelib.NativeUtils;
-import org.apache.commons.lang3.SystemUtils;
 
 class NativeIOJni {
 
@@ -51,12 +50,23 @@ class NativeIOJni {
 
     static {
         try {
-            if (SystemUtils.IS_OS_MAC_OSX) {
-                NativeUtils.loadLibraryFromJar("/lib/libnative-io.jnilib");
-            } else if (SystemUtils.IS_OS_LINUX) {
-                NativeUtils.loadLibraryFromJar("/lib/libnative-io.so");
+            String configuredLibraryPath = NativeIOLibraryPath.configuredLibraryPath();
+            if (configuredLibraryPath != null) {
+                NativeUtils.loadLibraryFromFile(configuredLibraryPath);
             } else {
-                throw new RuntimeException("OS not supported by Native-IO utils");
+                Exception lastException = null;
+                for (String libraryPath : NativeIOLibraryPath.currentPlatformLibraryCandidates()) {
+                    try {
+                        NativeUtils.loadLibraryFromJar(libraryPath);
+                        lastException = null;
+                        break;
+                    } catch (Exception e) {
+                        lastException = e;
+                    }
+                }
+                if (lastException != null) {
+                    throw lastException;
+                }
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
